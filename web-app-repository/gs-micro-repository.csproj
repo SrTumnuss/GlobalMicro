@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\web-app-domain\web-app-domain.csproj" />
+	  <ProjectReference Include="..\web-app-domain\gd-micro-domain.csproj" />
 	</ItemGroup>
 
 </Project>

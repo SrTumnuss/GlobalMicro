@@ -1,21 +1,21 @@
-using web_app_repository;
+using web_energy_repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Configurar MongoDB
+builder.Services.Configure<MongoSettings>(
+    builder.Configuration.GetSection("MongoSettings"));
+
+// Injeção de dependência
+builder.Services.AddScoped<IConsumoRepository, MongoConsumoRepository>();
+
+// Serviços padrões
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configurar injeção de dependência
-// Adiciona a injeção de dependência para os repositórios de Usuário e Produto
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -23,9 +23,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

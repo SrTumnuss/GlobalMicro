@@ -129,11 +129,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lukin\\Downloads\\web-app-performance-main (1)\\web-app-performance-main\\web-app-domain\\web-app-domain.csproj",
-      "projectName": "web-app-domain",
-      "projectPath": "C:\\Users\\lukin\\Downloads\\web-app-performance-main (1)\\web-app-performance-main\\web-app-domain\\web-app-domain.csproj",
+      "projectUniqueName": "C:\\Users\\lukin\\OneDrive\\Área de Trabalho\\Faculdade\\Global Micro\\web-app-domain\\gd-micro-domain.csproj",
+      "projectName": "gd-micro-domain",
+      "projectPath": "C:\\Users\\lukin\\OneDrive\\Área de Trabalho\\Faculdade\\Global Micro\\web-app-domain\\gd-micro-domain.csproj",
       "packagesPath": "C:\\Users\\lukin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lukin\\Downloads\\web-app-performance-main (1)\\web-app-performance-main\\web-app-domain\\obj\\",
+      "outputPath": "C:\\Users\\lukin\\OneDrive\\Área de Trabalho\\Faculdade\\Global Micro\\web-app-domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

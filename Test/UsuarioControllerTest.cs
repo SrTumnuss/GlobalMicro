@@ -1,119 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Moq;
-using Newtonsoft.Json;
-using web_app_domain;
-using web_app_performance.Controllers;
-using web_app_repository;
+﻿//using Microsoft.AspNetCore.Mvc;
+//using Moq;
+//using web_energy_domain;
+//using web_energy_performance.Controllers;
+//using web_energy_repository;
+//using Xunit;
 
-namespace Test
-{
-    public class UsuarioControllerTest
-    {
-        private readonly Mock<IUsuarioRepository> _userRepositoryMock;
-        private readonly UsuarioController _controller;
+//namespace Test
+//{
+//    public class ConsumoControllerTest
+//    {
+//        private readonly Mock<IConsumoRepository> _repositoryMock;
+//        private readonly ConsumoController _controller;
 
-        public UsuarioControllerTest()
-        {
-            _userRepositoryMock = new Mock<IUsuarioRepository>();
-            _controller = new UsuarioController(_userRepositoryMock.Object);
+//        public ConsumoControllerTest()
+//        {
+//            _repositoryMock = new Mock<IConsumoRepository>();
+//            _controller = new ConsumoController(_repositoryMock.Object);
+//        }
 
+//        [Fact]
+//        public async Task HealthCheck_ShouldReturnOk()
+//        {
+//            var result = _controller.HealthCheck();
 
-        }
+//            Assert.IsType<OkObjectResult>(result);
+//        }
 
-        [Fact]
-        public async Task Get_ListarUsariosOk()
-        {
-            var usuarios = new List<Usuario>()
-            {
+//        [Fact]
+//        public async Task GetConsumos_ShouldReturnOkWithList()
+//        {
+//            var consumos = new List<Consumo>
+//            {
+//                new Consumo { Id = 1, DataHora = DateTime.Now, EnergiaConsumida = 50.5 }
+//            };
 
-                new Usuario()
-                {
-                    Id = 1,
-                    Nome = "LUCAS",
-                    Email = "xxxx@gmail.com"
-                }
-            };
-            _userRepositoryMock.Setup(r => r.ListarUsuarios()).ReturnsAsync(usuarios);
+//            _repositoryMock.Setup(repo => repo.ListarConsumos()).ReturnsAsync(consumos);
 
+//            var result = await _controller.GetConsumos();
 
-            var result = await _controller.GetUsuario();
-            
-            Assert.IsType<OkObjectResult>(result);
-            var okResult = result as OkObjectResult;
-            Assert.Equal(JsonConvert.SerializeObject(usuarios), JsonConvert.SerializeObject(okResult.Value));
-        }
-
-
-   
-
-        [Fact]
-        public async Task Get_ListarRetornaNotFound()
-        {
-            _userRepositoryMock.Setup(u => u.ListarUsuarios()).ReturnsAsync((IEnumerable<Usuario>)null);
-
-            var result = await _controller.GetUsuario();
-
-            Assert.IsType<NotFoundResult>(result);
-        }
-
-        [Fact]
-        public async Task Post_SalvarUsuario()
-        {
-            //arrange
-            var usuario = new Usuario()
-            {
-                Id = 1,
-                Email = "lucas@fiap.com",
-                Nome = "Lucas"
-            };
-            _userRepositoryMock.Setup(u => u.SalvarUsuario(It.IsAny<Usuario>()))
-                .Returns(Task.CompletedTask);
-
-            //Act 
-
-            var result = await _controller.Post(usuario);
-
-
-            _userRepositoryMock.Verify(u => u.SalvarUsuario(It.IsAny<Usuario>()), Times.Once);
-
-            Assert.IsType<OkObjectResult>(result);
-
-        }
-
-        [Fact]
-        public async Task Put_ShouldUpdateUsuario_AndReturnOk()
-        {
-            var usuario = new Usuario
-            {
-                Id = 1,
-                Nome = "Thiago Atualizado",
-                Email = "thiago_atualizado@fiap.com"
-            };
-            _userRepositoryMock.Setup(repo => repo.AtualizarUsuario(It.IsAny<Usuario>())).Returns(Task.CompletedTask);
-
-            var result = await _controller.Put(usuario);
-
-            _userRepositoryMock.Verify(repo => repo.AtualizarUsuario(It.Is<Usuario>(u =>
-                u.Id == usuario.Id &&
-                u.Nome == usuario.Nome &&
-                u.Email == usuario.Email
-            )), Times.Once);
-
-            Assert.IsType<OkResult>(result);
-        }
-
-        [Fact]
-        public async Task Delete_ShouldRemoveUsuario_AndReturnOk()
-        {
-            int id = 1;
-            _userRepositoryMock.Setup(repo => repo.RemoverUsuario(id)).Returns(Task.CompletedTask);
-
-            var result = await _controller.Delete(id);
-
-            _userRepositoryMock.Verify(repo => repo.RemoverUsuario(id), Times.Once);
-            Assert.IsType<OkResult>(result);
-        }
-
-    }
-} 
-
+//            var okResult = Assert.IsType<OkObjectResult>(result);
+//            Assert.Equal(consumos, okResult.Value);
+//        }
+//    }
+//}

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lukin\\source\\repos\\web-app-performace\\web-app-performace\\web-app-performace.csproj": {}
+    "C:\\Users\\lukin\\OneDrive\\Área de Trabalho\\Faculdade\\Global Micro\\web-app-performace.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lukin\\source\\repos\\web-app-performace\\web-app-performace\\web-app-performace.csproj": {
+    "C:\\Users\\lukin\\OneDrive\\Área de Trabalho\\Faculdade\\Global Micro\\web-app-performace.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lukin\\source\\repos\\web-app-performace\\web-app-performace\\web-app-performace.csproj",
+        "projectUniqueName": "C:\\Users\\lukin\\OneDrive\\Área de Trabalho\\Faculdade\\Global Micro\\web-app-performace.csproj",
         "projectName": "web-app-performace",
-        "projectPath": "C:\\Users\\lukin\\source\\repos\\web-app-performace\\web-app-performace\\web-app-performace.csproj",
+        "projectPath": "C:\\Users\\lukin\\OneDrive\\Área de Trabalho\\Faculdade\\Global Micro\\web-app-performace.csproj",
         "packagesPath": "C:\\Users\\lukin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lukin\\source\\repos\\web-app-performace\\web-app-performace\\obj\\",
+        "outputPath": "C:\\Users\\lukin\\OneDrive\\Área de Trabalho\\Faculdade\\Global Micro\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -52,6 +52,10 @@
             "Dapper": {
               "target": "Package",
               "version": "[2.1.35, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[3.0.0, )"
             },
             "MySqlConnector": {
               "target": "Package",

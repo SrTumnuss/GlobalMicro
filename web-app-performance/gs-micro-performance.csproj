@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\web-app-domain\web-app-domain.csproj" />
-    <ProjectReference Include="..\web-app-repository\web-app-repository.csproj" />
+    <ProjectReference Include="..\web-app-domain\gd-micro-domain.csproj" />
+    <ProjectReference Include="..\web-app-repository\gs-micro-repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,51 +1,67 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using web_app_repository;
 using web_energy_domain;
-using web_energy_repository;
 
-namespace web_energy_performance.Controllers
+namespace web_app_performance.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ConsumoMongoController : ControllerBase
+    public class ConsumoController : ControllerBase
     {
         private readonly IConsumoRepository _repository;
 
-        public ConsumoMongoController(IConsumoRepository repository)
+        public ConsumoController(IConsumoRepository repository)
         {
             _repository = repository;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetConsumos()
+        public async Task<IActionResult> ListarConsumos()
         {
             var consumos = await _repository.ListarConsumos();
-
             if (consumos == null || !consumos.Any())
-                return NotFound(new { mensagem = "Nenhum dado de consumo encontrado." });
+                return NotFound();
 
             return Ok(consumos);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetConsumo(string id)
+        public async Task<IActionResult> ObterConsumo(string id)
         {
             var consumo = await _repository.ObterConsumo(id);
-
             if (consumo == null)
-                return NotFound(new { mensagem = "Consumo não encontrado." });
+                return NotFound();
 
             return Ok(consumo);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostConsumo([FromBody] Consumo consumo)
+        public async Task<IActionResult> SalvarConsumo([FromBody] Consumo consumo)
         {
-            if (consumo == null)
-                return BadRequest(new { mensagem = "Dados inválidos." });
+            await _repository.SalvarConsumo(consumo);
+            return CreatedAtAction(nameof(ObterConsumo), new { id = consumo.Id }, consumo);
+        }
 
-            await _repository.RegistrarConsumo(consumo);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AtualizarConsumo(string id, [FromBody] Consumo consumoAtualizado)
+        {
+            var consumoExistente = await _repository.ObterConsumo(id);
+            if (consumoExistente == null)
+                return NotFound();
 
-            return CreatedAtAction(nameof(GetConsumo), new { id = consumo.Id }, consumo);
+            await _repository.AtualizarConsumo(id, consumoAtualizado);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemoverConsumo(string id)
+        {
+            var consumoExistente = await _repository.ObterConsumo(id);
+            if (consumoExistente == null)
+                return NotFound();
+
+            await _repository.RemoverConsumo(id);
+            return NoContent();
         }
     }
 }

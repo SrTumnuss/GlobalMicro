@@ -1,15 +1,14 @@
-using web_energy_repository;
+using web_app_repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurar MongoDB
+// Configuração do MongoDB
 builder.Services.Configure<MongoSettings>(
     builder.Configuration.GetSection("MongoSettings"));
 
 // Injeção de dependência
-builder.Services.AddScoped<IConsumoRepository, MongoConsumoRepository>();
+builder.Services.AddScoped<IConsumoRepository, ConsumoRepository>();
 
-// Serviços padrões
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -25,4 +24,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
 app.Run();

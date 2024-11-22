@@ -1,46 +1,43 @@
-﻿using Dapper;
-using MySqlConnector;
+﻿using MongoDB.Driver;
+using Microsoft.Extensions.Options;
 using web_energy_domain;
 
-namespace web_energy_repository
+namespace web_app_repository
 {
     public class ConsumoRepository : IConsumoRepository
     {
-        private readonly MySqlConnection _connection;
+        private readonly IMongoCollection<Consumo> _collection;
 
-        public ConsumoRepository()
+        public ConsumoRepository(IOptions<MongoSettings> mongoSettings)
         {
-            string connectionString = "Server=localhost;Database=energia;User=root;Password=123;";
-            _connection = new MySqlConnection(connectionString);
+            var client = new MongoClient(mongoSettings.Value.ConnectionString);
+            var database = client.GetDatabase(mongoSettings.Value.DatabaseName);
+            _collection = database.GetCollection<Consumo>("Consumo");
         }
 
         public async Task<IEnumerable<Consumo>> ListarConsumos()
         {
-            await _connection.OpenAsync();
-            string query = @"SELECT Id, NomeDoEletronico, HoraMonitoramento, EnergiaConsumida, PotenciaDoAparelho, TempoDeUso 
-                             FROM consumos;";
-            var consumos = await _connection.QueryAsync<Consumo>(query);
-            await _connection.CloseAsync();
-            return consumos;
+            return await _collection.Find(_ => true).ToListAsync();
         }
 
-        public async Task RegistrarConsumo(Consumo consumo)
+        public async Task<Consumo> ObterConsumo(string id)
         {
-            await _connection.OpenAsync();
-            string sql = @"INSERT INTO consumos (NomeDoEletronico, HoraMonitoramento, EnergiaConsumida, PotenciaDoAparelho, TempoDeUso) 
-                           VALUES (@NomeDoEletronico, @HoraMonitoramento, @EnergiaConsumida, @PotenciaDoAparelho, @TempoDeUso);";
-            await _connection.ExecuteAsync(sql, consumo);
-            await _connection.CloseAsync();
+            return await _collection.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<Consumo?> ObterConsumo(int id)
+        public async Task SalvarConsumo(Consumo consumo)
         {
-            await _connection.OpenAsync();
-            string sql = @"SELECT Id, NomeDoEletronico, HoraMonitoramento, EnergiaConsumida, PotenciaDoAparelho, TempoDeUso 
-                           FROM consumos WHERE Id = @id;";
-            var consumo = await _connection.QueryFirstOrDefaultAsync<Consumo>(sql, new { id });
-            await _connection.CloseAsync();
-            return consumo;
+            await _collection.InsertOneAsync(consumo);
+        }
+
+        public async Task AtualizarConsumo(string id, Consumo consumoAtualizado)
+        {
+            await _collection.ReplaceOneAsync(c => c.Id == id, consumoAtualizado);
+        }
+
+        public async Task RemoverConsumo(string id)
+        {
+            await _collection.DeleteOneAsync(c => c.Id == id);
         }
     }
 }

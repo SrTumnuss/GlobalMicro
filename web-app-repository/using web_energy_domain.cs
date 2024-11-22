@@ -1,33 +1,43 @@
-﻿using Microsoft.Extensions.Options;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
+using Microsoft.Extensions.Options;
 using web_energy_domain;
 
-namespace web_energy_repository
+namespace web_app_repository
 {
     public class MongoConsumoRepository : IConsumoRepository
     {
-        private readonly IMongoCollection<Consumo> _consumoCollection;
+        private readonly IMongoCollection<Consumo> _collection;
 
-        public MongoConsumoRepository(IOptions<MongoSettings> settings)
+        public MongoConsumoRepository(IOptions<MongoSettings> mongoSettings)
         {
-            var client = new MongoClient(settings.Value.ConnectionString);
-            var database = client.GetDatabase(settings.Value.DatabaseName);
-            _consumoCollection = database.GetCollection<Consumo>("consumos");
+            var client = new MongoClient(mongoSettings.Value.ConnectionString);
+            var database = client.GetDatabase(mongoSettings.Value.DatabaseName);
+            _collection = database.GetCollection<Consumo>("Consumo");
         }
 
         public async Task<IEnumerable<Consumo>> ListarConsumos()
         {
-            return await _consumoCollection.Find(_ => true).ToListAsync();
+            return await _collection.Find(_ => true).ToListAsync();
         }
 
-        public async Task<Consumo?> ObterConsumo(string id)
+        public async Task<Consumo> ObterConsumo(string id)
         {
-            return await _consumoCollection.Find(c => c.Id == id).FirstOrDefaultAsync();
+            return await _collection.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task RegistrarConsumo(Consumo consumo)
+        public async Task SalvarConsumo(Consumo consumo)
         {
-            await _consumoCollection.InsertOneAsync(consumo);
+            await _collection.InsertOneAsync(consumo);
+        }
+
+        public async Task AtualizarConsumo(string id, Consumo consumoAtualizado)
+        {
+            await _collection.ReplaceOneAsync(c => c.Id == id, consumoAtualizado);
+        }
+
+        public async Task RemoverConsumo(string id)
+        {
+            await _collection.DeleteOneAsync(c => c.Id == id);
         }
     }
 }

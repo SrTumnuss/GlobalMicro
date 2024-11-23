@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("gs-micro-performance")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39154840fb1a330d1ec40a5373b90089c00dcce5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29ea9187ba6bb5f0046e1ddee5700f91a59c98f4")]
 [assembly: System.Reflection.AssemblyProductAttribute("gs-micro-performance")]
 [assembly: System.Reflection.AssemblyTitleAttribute("gs-micro-performance")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

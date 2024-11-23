@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using MongoDB.Bson;
 using Microsoft.Extensions.Options;
 using web_energy_domain;
 
@@ -22,22 +23,38 @@ namespace web_app_repository
 
         public async Task<Consumo> ObterConsumo(string id)
         {
-            return await _collection.Find(c => c.Id == id).FirstOrDefaultAsync();
+            // Convertendo o string ID para ObjectId
+            if (ObjectId.TryParse(id, out var objectId))
+            {
+                return await _collection.Find(c => c.Id == objectId).FirstOrDefaultAsync();
+            }
+            return null;  // Retorna null se o ID não for válido
         }
 
         public async Task SalvarConsumo(Consumo consumo)
         {
+            // O MongoDB vai gerar automaticamente um ObjectId para o campo Id
             await _collection.InsertOneAsync(consumo);
         }
 
         public async Task AtualizarConsumo(string id, Consumo consumoAtualizado)
         {
-            await _collection.ReplaceOneAsync(c => c.Id == id, consumoAtualizado);
+            // Convertendo o string ID para ObjectId
+            if (ObjectId.TryParse(id, out var objectId))
+            {
+                // Atualiza o consumo usando o ObjectId
+                await _collection.ReplaceOneAsync(c => c.Id == objectId, consumoAtualizado);
+            }
         }
 
         public async Task RemoverConsumo(string id)
         {
-            await _collection.DeleteOneAsync(c => c.Id == id);
+            // Convertendo o string ID para ObjectId
+            if (ObjectId.TryParse(id, out var objectId))
+            {
+                // Remove o consumo usando o ObjectId
+                await _collection.DeleteOneAsync(c => c.Id == objectId);
+            }
         }
     }
 }

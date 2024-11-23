@@ -1,0 +1,17 @@
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\bin\Debug\net8.0\Consumidor.Mensageria.exe
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\bin\Debug\net8.0\Consumidor.Mensageria.deps.json
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\bin\Debug\net8.0\Consumidor.Mensageria.runtimeconfig.json
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\bin\Debug\net8.0\Consumidor.Mensageria.dll
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\bin\Debug\net8.0\Consumidor.Mensageria.pdb
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\bin\Debug\net8.0\RabbitMQ.Client.dll
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\Consumidor.Mensageria.csproj.AssemblyReference.cache
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\Consumidor.Mensageria.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\Consumidor.Mensageria.AssemblyInfoInputs.cache
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\Consumidor.Mensageria.AssemblyInfo.cs
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\Consumidor.Mensageria.csproj.CoreCompileInputs.cache
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\Consumid.F8D8F4E0.Up2Date
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\Consumidor.Mensageria.dll
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\refint\Consumidor.Mensageria.dll
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\Consumidor.Mensageria.pdb
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\Consumidor.Mensageria.genruntimeconfig.cache
+C:\Users\lukin\source\repos\Consumidor.Mensageria\Consumidor.Mensageria\obj\Debug\net8.0\ref\Consumidor.Mensageria.dll

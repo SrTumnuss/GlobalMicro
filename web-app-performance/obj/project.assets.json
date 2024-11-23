@@ -477,7 +477,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "MongoDB.Bson": "3.0.0",
           "MongoDB.Driver": "3.0.0",
+          "Newtonsoft.Json": "13.0.3",
           "RabbitMQ.Client": "6.8.1"
         },
         "compile": {
@@ -493,8 +495,10 @@
         "dependencies": {
           "Dapper": "2.1.35",
           "Microsoft.Extensions.Options": "9.0.0",
+          "MongoDB.Bson": "3.0.0",
           "MongoDB.Driver": "3.0.0",
           "MySqlConnector": "2.3.7",
+          "Newtonsoft.Json": "13.0.3",
           "RabbitMQ.Client": "6.8.1",
           "gd-micro-domain": "1.0.0"
         },
@@ -1585,6 +1589,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "MongoDB.Bson >= 3.0.0",
       "MongoDB.Driver >= 3.0.0",
       "Newtonsoft.Json >= 13.0.3",
       "RabbitMQ.Client >= 6.8.1",
@@ -1650,6 +1655,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "MongoDB.Bson": {
+            "target": "Package",
+            "version": "[3.0.0, )"
+          },
           "MongoDB.Driver": {
             "target": "Package",
             "version": "[3.0.0, )"

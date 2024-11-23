@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "9qBp4bP8vgA7vwpS5yFJIDlShuADeypVLUm6PdXIId0OG6STuHdjacvkxhtPJIvacP+6SU+ONnEj42YjiC93xQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lukin\\source\\repos\\Consumidor.Mensageria\\Consumidor.Mensageria\\Consumidor.Mensageria.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lukin\\.nuget\\packages\\rabbitmq.client\\6.8.1\\rabbitmq.client.6.8.1.nupkg.sha512",
+    "C:\\Users\\lukin\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\lukin\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

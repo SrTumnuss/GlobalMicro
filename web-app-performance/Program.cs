@@ -1,12 +1,22 @@
 using web_app_repository;
+using MongoDB.Driver;
+using web_energy_domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração do MongoDB
-builder.Services.Configure<MongoSettings>(
-    builder.Configuration.GetSection("MongoSettings"));
+// Configuração do MongoSettings
+builder.Services.AddSingleton(new MongoSettings
+{
+    ConnectionString = "mongodb://energia:1234@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-256",
+    DatabaseName = "EnergyMonitorDB"
+});
 
-// Injeção de dependência
+builder.Services.AddSingleton<IMongoClient>(sp =>
+{
+    var mongoSettings = sp.GetRequiredService<MongoSettings>();
+    return new MongoClient(mongoSettings.ConnectionString);
+});
+
 builder.Services.AddScoped<IConsumoRepository, ConsumoRepository>();
 
 builder.Services.AddControllers();

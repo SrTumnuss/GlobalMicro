@@ -28,11 +28,18 @@ namespace web_app_performance.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterConsumo(string id)
         {
-            var consumo = await _repository.ObterConsumo(id);
-            if (consumo == null)
-                return NotFound();
+            try
+            {
+                var consumo = await _repository.ObterConsumo(id);
+                if (consumo == null)
+                    return NotFound();
 
-            return Ok(consumo);
+                return Ok(consumo);
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("ID inválido.");
+            }
         }
 
         [HttpPost]
@@ -45,23 +52,37 @@ namespace web_app_performance.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> AtualizarConsumo(string id, [FromBody] Consumo consumoAtualizado)
         {
-            var consumoExistente = await _repository.ObterConsumo(id);
-            if (consumoExistente == null)
-                return NotFound();
+            try
+            {
+                var consumoExistente = await _repository.ObterConsumo(id);
+                if (consumoExistente == null)
+                    return NotFound();
 
-            await _repository.AtualizarConsumo(id, consumoAtualizado);
-            return NoContent();
+                await _repository.AtualizarConsumo(id, consumoAtualizado);
+                return NoContent();
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("ID inválido.");
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoverConsumo(string id)
         {
-            var consumoExistente = await _repository.ObterConsumo(id);
-            if (consumoExistente == null)
-                return NotFound();
+            try
+            {
+                var consumoExistente = await _repository.ObterConsumo(id);
+                if (consumoExistente == null)
+                    return NotFound();
 
-            await _repository.RemoverConsumo(id);
-            return NoContent();
+                await _repository.RemoverConsumo(id);
+                return NoContent();
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("ID inválido.");
+            }
         }
     }
 }

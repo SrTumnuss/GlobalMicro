@@ -1,5 +1,5 @@
 ﻿using MongoDB.Driver;
-using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using web_energy_domain;
 
 namespace web_app_repository
@@ -8,10 +8,10 @@ namespace web_app_repository
     {
         private readonly IMongoCollection<Consumo> _collection;
 
-        public ConsumoRepository(IOptions<MongoSettings> mongoSettings)
+        public ConsumoRepository(MongoSettings mongoSettings)
         {
-            var client = new MongoClient(mongoSettings.Value.ConnectionString);
-            var database = client.GetDatabase(mongoSettings.Value.DatabaseName);
+            var client = new MongoClient(mongoSettings.ConnectionString);
+            var database = client.GetDatabase(mongoSettings.DatabaseName);
             _collection = database.GetCollection<Consumo>("Consumo");
         }
 
@@ -22,22 +22,36 @@ namespace web_app_repository
 
         public async Task<Consumo> ObterConsumo(string id)
         {
-            return await _collection.Find(c => c.Id == id).FirstOrDefaultAsync();
+            // Convertendo o ID de string para ObjectId
+            if (ObjectId.TryParse(id, out var objectId))
+            {
+                return await _collection.Find(c => c.Id == objectId).FirstOrDefaultAsync();
+            }
+            return null;  // Se o ID não for válido, retorna null
         }
 
         public async Task SalvarConsumo(Consumo consumo)
         {
+            // Inserindo o consumo, o MongoDB vai gerar automaticamente um ObjectId
             await _collection.InsertOneAsync(consumo);
         }
 
         public async Task AtualizarConsumo(string id, Consumo consumoAtualizado)
         {
-            await _collection.ReplaceOneAsync(c => c.Id == id, consumoAtualizado);
+            // Convertendo o ID de string para ObjectId
+            if (ObjectId.TryParse(id, out var objectId))
+            {
+                await _collection.ReplaceOneAsync(c => c.Id == objectId, consumoAtualizado);
+            }
         }
 
         public async Task RemoverConsumo(string id)
         {
-            await _collection.DeleteOneAsync(c => c.Id == id);
+            // Convertendo o ID de string para ObjectId
+            if (ObjectId.TryParse(id, out var objectId))
+            {
+                await _collection.DeleteOneAsync(c => c.Id == objectId);
+            }
         }
     }
 }

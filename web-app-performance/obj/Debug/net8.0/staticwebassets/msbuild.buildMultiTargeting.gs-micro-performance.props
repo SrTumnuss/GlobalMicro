@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\gs-micro-performance.props" />
+</Project>
